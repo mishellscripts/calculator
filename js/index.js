@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	var currentInput = "0";
-	var previousInput = currentInput;
+	var previousExpression = "";
 	var maxDigits = 9;
 	var error = false;
 	
@@ -14,6 +14,7 @@ $(document).ready(function() {
 			if (selected === "ac") {
 				console.log("hello");
 				error = false;
+                $("#history").html("");
 				$("#input-value").removeClass("blink");
 				$("#input-value").html("0");
 				currentInput = "0";
@@ -23,7 +24,8 @@ $(document).ready(function() {
 				error = false;
 				$("#input-value").removeClass("blink");
 				$("#input-value").html("0");
-				currentInput = previousInput;
+                $("#history").html(currentInput);
+				currentInput = "0";
 			}
 			// Overwrite 0 if entry is currently 'clear', but allow appending a decimal point
 			else if(currentInput === "0" && selected !== ".") {
@@ -36,7 +38,19 @@ $(document).ready(function() {
 		}
 		// Upon "=", compute result and display it immediately
 		else {
-			console.log("evaluating");
+			// Case where computation continues from history: append history to beginning
+			// ONLY if computation continues (if first char is an arithmetic operator)
+			var history = $("#history").html();
+			var operators = ["*", "/", "+", "-"];
+			var case1 = !operators.includes(history.charAt(history.length-1))
+                && operators.includes(currentInput.charAt(0));
+			var case2 = operators.includes(history.charAt(history.length-1))
+                && !operators.includes(currentInput.charAt(0));
+            if (history &&  (case1 || case2)) {
+                console.log("happens");
+            	currentInput = history + currentInput;
+            }
+
 			// Evaluate expression result and convert to sting for parsing
 			var result = eval(currentInput).toString();
 			// Parse into 2 strings: before & after decimal
@@ -71,6 +85,9 @@ $(document).ready(function() {
 				$("#input-value").html(currentInput);
 				$("#input-value").addClass("blink");
 			}
+
+			// Clear entry history after computation result
+            $("#history").html("");
 		}
 
 		// Only allow adding to input if there isn't an error

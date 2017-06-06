@@ -1,6 +1,6 @@
 body {
   /*background: rgb(235, 187, 173);*/
-	background: #ECB3A7;
+	background: #f9b491;
 }
 
 /*==== Calculator Background ====*/
@@ -9,23 +9,22 @@ body {
 	height: 400px;
 	width: 300px;
 	border-radius: 30px;
+	margin-top: 10%;
 }
 
 #calculator-shadow {
 	background: rgb(206,206,206);
 	position: absolute;
-	left: 430px;
-	top: -10px;
+	left: calc(33% + 10px);
 	z-index: 1;
 }
 
 #calculator {
-	margin-left: auto;
-  	margin-right: auto;
-	margin-top: 10%;
+	left: 33%;
+	top: -10px;
 	background: #E8E8EE;
 	z-index: 2;
-	position: relative;
+	position: absolute;
 }
 
 /*==== Calculator Input ====*/
@@ -40,14 +39,24 @@ body {
 	overflow: hidden;
 }
 
+#history {
+	float: left;
+	font-family: 'Orbitron', sans-serif;
+	font-size: .8em;
+	color: #808080;
+	margin-top: 1%;
+	margin-left: 1%;
+}
+
 #input-value {
 	font-family: 'Orbitron', sans-serif;
-	text-align: right;
+	float: right;
 	font-size: 1.9em;
 	margin-top: 5%;
 	margin-right: 2%;
 	color: #808080;
 }
+
 
 /*==== Calculator Buttons ====*/
 
@@ -79,18 +88,6 @@ button:not(.red):hover {
 .red {
 	background: #DC143C;
 	color: #ffffff;
-}
-
-/*==== Credits ====*/
-
-#credits {
-	margin-left: auto;
-	margin-right: auto;
-	width: 300px;
-	text-align: center;
-	position: relative;
-	margin-top: 1%;
-	margin-bottom: 10%;
 }
 
 /*==== Error message for overflow ====*/
